@@ -475,7 +475,6 @@ namespace MongoDB.Driver.Tests.Search
             }
             _mongoClient.Dispose();
         }
-        protected override void DisposeInternal() => _mongoClient?.Dispose();
 
         [Fact]
         public void Autocomplete()
