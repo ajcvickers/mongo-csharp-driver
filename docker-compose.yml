@@ -16,6 +16,11 @@ services:
         mongosh --quiet --eval "
           try {
             rs.status();
+            var fcv = db.adminCommand({ getParameter: 1, featureCompatibilityVersion: 1 });
+            if (fcv.featureCompatibilityVersion.version !== '8.3') {
+              db.adminCommand({ setFeatureCompatibilityVersion: '8.3', confirm: true });
+              print('FCV set to 8.3');
+            }
             print('Replica set initialized');
           } catch(e) {
             print('Initializing replica set...');
